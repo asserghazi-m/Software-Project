@@ -3,22 +3,28 @@ name: Java CI
 on:
   push:
     branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Set up Java
-      uses: actions/setup-java@v3
+    - name: Set up JDK
+      uses: actions/setup-java@v4
       with:
-        java-version: '17'
         distribution: 'temurin'
+        java-version: '17'
 
-    - name: Compile Java files
+    - name: List Java files (debug)
+      run: find . -name "*.java"
+
+    - name: Compile all Java sources
       run: |
         find . -name "*.java" > sources.txt
         javac @sources.txt
+
