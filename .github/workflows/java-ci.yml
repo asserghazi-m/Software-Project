@@ -1,4 +1,4 @@
-name: Java CI (NetBeans)
+name: Java Automated Test
 
 on:
   push:
@@ -7,20 +7,22 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout repository
       uses: actions/checkout@v4
 
     - name: Set up Java
       uses: actions/setup-java@v4
       with:
-        distribution: 'temurin'
         java-version: '17'
+        distribution: 'temurin'
 
-    - name: Compile Java files
+    - name: Compile all Java files
       run: |
-        find . -name "*.java" > sources.txt
-        javac @sources.txt
+        find . -name "*.java" -print0 | xargs -0 javac -d .
+
+    - name: Run single automated test
+      run: java CoursesMethodTest
