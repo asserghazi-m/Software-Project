@@ -2,6 +2,7 @@ package com.mycompany.studentgrading;
 
 import java.io.*;
 import java.util.*;
+import java.util.ArrayList;
 
 public class coursesmethod {
     private static final String courseFile = "courses.txt";
@@ -67,4 +68,18 @@ public class coursesmethod {
     public int getCourseCount() {
         return getAllCourses().size();
     }
+    public ArrayList<Courses> filterbyname(String courseName) {
+    ArrayList<Courses> result = new ArrayList<>();
+
+    if (courseName == null || courseName.isEmpty()) {
+        return result;
+    }
+
+    for (Courses c : getAllCourses()) {
+        if (c.getCourseName().toLowerCase().contains(courseName.toLowerCase())) {
+            result.add(c);
+        }
+    }
+    return result;
+}
 }
