@@ -4,6 +4,8 @@
  */
 package com.mycompany.studentgrading;
 
+
+
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import java.io.File;
@@ -13,7 +15,8 @@ public class studentmethodsTest {
 
     @Test
     void testAddStudent_validStudent() throws Exception {
-        // Clean students file before test (adjust name if different)
+
+        // Ensure clean environment (VERY IMPORTANT FOR CI)
         File file = new File("students.txt");
         if (file.exists()) {
             new PrintWriter(file).close();
@@ -28,4 +31,5 @@ public class studentmethodsTest {
         assertEquals(1, sm.getStudentCount());
     }
 }
+
 
